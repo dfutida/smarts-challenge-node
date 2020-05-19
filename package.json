@@ -1,0 +1,17 @@
+{
+  "name": "smarts-challenge-node.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "https": "^1.0.0",
+    "request": "^2.88.2"
+  }
+}
