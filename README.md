@@ -1,8 +1,8 @@
-<h3>smarts-challenge-node</h3><br><br>
+<h3>smarts-challenge-node</h3><br>
 
-Acesse: https://github.com/dfutida/smarts-challenge-node<br><br>
+Acesse: https://github.com/dfutida/smarts-challenge-node<br>
 
-Baixe a versão zip no botão "Clone or download" do github.<br><br>
+Baixe a versão zip no botão "Clone or download" do github.<br>
 
 1- Descompacte o arquivo .zip na sua área de trabalho.<br><br>
 2- Abra o projeto no Visual Studio Code. Você pode fazer o download do programa aqui: https://code.visualstudio.com/download <br>
