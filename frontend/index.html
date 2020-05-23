@@ -17,9 +17,12 @@
   <center><h1>Smarts Dashboards</h1>
   <p>
     <form name="myForm" action="/frontend/detalhes.html">
-      <label for="mySearch">Digite seu primeiro nome:</label>
-      <input name="nome" type="text" size="30" />
-      <input type="submit">
+      <div class="input-group mb-3">
+      <input class="form-control" type="text" placeholder="Digite seu primeiro nome" style="width: 300px;" name="nome"  />
+      <div class="input-group-append">
+      <input class="btn btn-outline-secondary" type="submit">
+      </div>
+      </div>
     </form>
     <a id="btn-asc" href="" class="btn btn-info">A-Z</a>
     <a id="btn-desc" href="" class="btn btn-info">Z-A</a>

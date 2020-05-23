@@ -90,16 +90,14 @@ function MontarTemplateCliente (cliente) {
             console.log(objDadosJson);
 
           if(objDadosJson == 0) {
-          
-            document.getElementById("clienteDetalhes").innerHTML = "<center><h2>Nome não encontrado!</h2></center>";
-
+            listaClientes.innerHTML = "<center><h3>Nome não encontrado!</h3></center>";
+          } else if(nome == '') {
+            listaClientes.innerHTML = "<center><h3>Nome não pode ser vazio!</h3></center>";
           } else {
-          
             objDadosJson.map(cliente => {
             var clienteHtml = MontarTemplateCliente(cliente)
             listaClientes.innerHTML += clienteHtml;
-            })    
-          
+            })
           }
         }
     }
