@@ -39,7 +39,7 @@ function goBack() {
 }
 
 function MontarTemplateCliente (cliente) {
-  return `<div class="cliente">
+  return `<div>
     <table width="100%" border="0">
     <tr>
     <td align="center">
@@ -77,9 +77,10 @@ function MontarTemplateCliente (cliente) {
     </tr>
     </table>
   </div>`
-}
+  }
+
     function BuscarDetalhesCliente(nome) {
-        axios.get(`http://localhost:3000/clientes?pegaDetalhes=${nome}`)
+        axios.get(`http://localhost:3000/backend/clientes?pegaDetalhes=${nome}`)
         .then(response => criaListaDinamica(response.data))
         .catch(error => console.log(error))
         const criaListaDinamica = ( objDadosJson ) => {
@@ -88,10 +89,18 @@ function MontarTemplateCliente (cliente) {
 
             console.log(objDadosJson);
 
+          if(objDadosJson == 0) {
+          
+            document.getElementById("clienteDetalhes").innerHTML = "<center><h2>Nome não encontrado!</h2></center>";
+
+          } else {
+          
             objDadosJson.map(cliente => {
             var clienteHtml = MontarTemplateCliente(cliente)
             listaClientes.innerHTML += clienteHtml;
             })    
+          
+          }
         }
     }
 

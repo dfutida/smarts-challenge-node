@@ -15,8 +15,15 @@
 </head>
 <body>
   <center><h1>Smarts Dashboards</h1>
-  <p><a id="btn-asc" href="" class="btn btn-info">A-Z</a>
-    <a id="btn-desc" href="" class="btn btn-info">Z-A</a></p>
+  <p>
+    <form name="myForm" action="/frontend/detalhes.html">
+      <label for="mySearch">Digite seu primeiro nome:</label>
+      <input name="nome" type="text" size="30" />
+      <input type="submit">
+    </form>
+    <a id="btn-asc" href="" class="btn btn-info">A-Z</a>
+    <a id="btn-desc" href="" class="btn btn-info">Z-A</a>
+  </p>
   </center>
   <div id="listaClientes">
     
@@ -101,7 +108,7 @@ function MontarTemplateNavegacao (paginacao, sort) {
 }
 
 function BuscarClientes(pagina, sort) {
-  axios.get(`http://localhost:3000/clientes?pagina=${pagina}&sort=${sort}`)
+  axios.get(`http://localhost:3000/backend/clientes?pagina=${pagina}&sort=${sort}`)
   .then(response => criaListaDinamica(response.data))
   .catch(error => console.log(error))
   
@@ -122,13 +129,12 @@ function BuscarClientes(pagina, sort) {
   }
 }
 
-function IniciarLinks(pagina) {
+function IniciarLinks(pagina, cliente) {
   var btnAsc = document.getElementById("btn-asc");
   btnAsc.href = `http://localhost:8080/frontend/index.html/?pagina=${pagina}&sort=asc`;
   var btnDesc = document.getElementById("btn-desc");
   btnDesc.href = `http://localhost:8080/frontend/index.html/?pagina=${pagina}&sort=desc`;
 }
-
 
 var url = new URL(window.location.href);
 var paginaUrl = url.searchParams.get("pagina");
