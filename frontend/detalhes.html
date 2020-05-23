@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Smarts Dashboards</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+    <center>
+        <h1>Detalhes do Cliente</h1>
+        <table style="border: 0; width: 50%; text-align: center;">
+            <tr>
+                <td><button onclick="goBack()" type="button" class="btn btn-info">Voltar</button></td>
+            </tr>
+        </table>
+    </center>
+
+    <div id="clienteDetalhes">
+
+    </div>
+</body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script>
+
+var objDebug = null;
+
+function goBack() {
+  window.history.back();
+}
+
+function MontarTemplateCliente (cliente) {
+  return `<div class="cliente">
+    <table width="100%" border="0">
+    <tr>
+    <td align="center">
+    <table border="0" class="table table-striped">
+      <tr>
+        <td style="padding: 10px; text-align:right;">
+            <img src="${cliente.pictures[0].url}">
+            <img src="${cliente.pictures[1].url}">
+            <img src="${cliente.pictures[2].url}">
+            <img src="${cliente.pictures[3].url}">
+        </td>
+        <td>
+          <p>ID: ${cliente._id}</p>
+          <p>Nome: ${cliente.name.first} ${cliente.name.last}</p>
+          <p>Email: ${cliente.email}</p>
+          <p>Empresa: ${cliente.company}</p>
+          <p>Idade: ${cliente.age}</p>
+          <p>Budget: ${cliente.budget}</p>
+          <p>Telefone: ${cliente.phone}</p>
+          <p>Endereço: ${cliente.address}</p>
+          <p>Sobre: ${cliente.about}</p>
+          <p>Data de registro: ${cliente.registered}</p>
+          <p>
+            Contato: <br>ID: ${cliente.contactTimeline[0].id}<br>Nome: ${cliente.contactTimeline[0].broker}<br>Data: ${cliente.contactTimeline[0].date}<br>
+            <br>ID: ${cliente.contactTimeline[1].id}<br>Nome: ${cliente.contactTimeline[1].broker}<br>Data: ${cliente.contactTimeline[1].date}<br>
+            <br>ID: ${cliente.contactTimeline[2].id}<br>Nome: ${cliente.contactTimeline[2].broker}<br>Data: ${cliente.contactTimeline[2].date}
+          </p>
+          <p>Canal: ${cliente.channel}</p>
+          <p>Latitude: ${cliente.latitude}</p>
+          <p>Longitude: ${cliente.longitude}</p>
+        </td>
+      </tr>
+    </table>
+    </td>
+    </tr>
+    </table>
+  </div>`
+}
+    function BuscarDetalhesCliente(nome) {
+        axios.get(`http://localhost:3000/clientes?pegaDetalhes=${nome}`)
+        .then(response => criaListaDinamica(response.data))
+        .catch(error => console.log(error))
+        const criaListaDinamica = ( objDadosJson ) => {
+            objDebug = objDadosJson;
+            const listaClientes = document.getElementById('clienteDetalhes')
+
+            console.log(objDadosJson);
+
+            objDadosJson.map(cliente => {
+            var clienteHtml = MontarTemplateCliente(cliente)
+            listaClientes.innerHTML += clienteHtml;
+            })    
+        }
+    }
+
+    var url = new URL(window.location.href);
+    var detalhesUrl = url.searchParams.get("nome");
+    var nome = detalhesUrl;
+
+    BuscarDetalhesCliente(nome);
+
+  </script>
+</html>
